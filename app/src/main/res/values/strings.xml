@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">YouTubeWatchHistory</string>
+    <string name="api_key">AIzaSyAGoEtNA5mvwHulrQgO-0qifG4U4T0fNAE</string>
+    <string name="client_id">129336563635-fk93k5jjahhmlrij1s6f6uoo9qsh2fso.apps.googleusercontent.com</string>
+    <string name="avatar">avatar</string>
+</resources>
