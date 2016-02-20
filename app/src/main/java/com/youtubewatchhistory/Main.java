@@ -81,6 +81,13 @@ public class Main extends AppCompatActivity {
         }
     }
 
+
+    /*
+    *
+    * The main method for load user's watch history
+    * Returned watch history with the further terminal on the screen
+    *
+    * */
     private void loadWatchHistory() {
         if (chosenAccountName == null) {
             Log.d(TAG, "chosenAccountName: " + chosenAccountName);
@@ -99,12 +106,20 @@ public class Main extends AppCompatActivity {
             protected List<History> doInBackground(Void... params) {
 
                 try {
+
+                    // Get the "watch History" playlist of a given user's channel
+                    // (as a channel ID is the key to getting user info).
+                    // Note that this will ONLY work when a user is authenticated via oAuth2.l
+                    // https://www.googleapis.com/youtube/v3/channels?part=contentDetails&mine=true&key={YOUR_API_KEY}
                     YouTube.Channels.List channelRequest = youTube.channels().list("contentDetails");
                     channelRequest.setMine(true);
                     ChannelListResponse channelResult = channelRequest.execute();
                     String playListId = channelResult.getItems().get(0).getContentDetails().
                             getRelatedPlaylists().getWatchHistory();
 
+                    // With that response, there should be a "watchHistory" playlist...
+                    // take it and call the playlistItems endpoint:
+                    // https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId={playListID}&key={YOUR_API_KEY}
                     YouTube.PlaylistItems.List playlistItemRequest =
                             youTube.playlistItems().list("snippet");
                     playlistItemRequest.setPlaylistId(playListId);
@@ -113,6 +128,7 @@ public class Main extends AppCompatActivity {
 
                     for (int i = 0; i < playlistItemResult.getItems().size(); i++) {
                         if (playlistItemResult.getItems().get(i).getSnippet().getThumbnails() != null) {
+
                             histories.add(new History(playlistItemResult
                                     .getItems().get(i).getSnippet().getTitle(),
                                     playlistItemResult.getItems().get(i).getSnippet().getThumbnails()
