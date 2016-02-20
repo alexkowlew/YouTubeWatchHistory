@@ -202,12 +202,5 @@ public class Main extends AppCompatActivity {
                 REQUEST_ACCOUNT_PICKER);
     }
 
-    private void loadAccount() {
-        SharedPreferences sp = PreferenceManager
-                .getDefaultSharedPreferences(this);
-        chosenAccountName = sp.getString(PREF_ACCOUNT_NAME, null);
-        invalidateOptionsMenu();
-
-    }
 
 }
