@@ -4,9 +4,9 @@ public class History {
 
     private String title, thumbnailUrl;
 
-    public History(String title, String bitmapUrl) {
+    public History(String title, String thumbnailUrl) {
         this.title = title;
-        this.thumbnailUrl = bitmapUrl;
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public History() {

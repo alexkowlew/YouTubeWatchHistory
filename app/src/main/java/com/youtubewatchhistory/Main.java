@@ -29,6 +29,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+*
+*   Main activity class which handles authorization
+*   and load user's watch history
+*
+* */
+
 public class Main extends AppCompatActivity {
 
     private final String TAG = Main.class.getName();
@@ -126,6 +133,7 @@ public class Main extends AppCompatActivity {
                     playlistItemRequest.setMaxResults(50l);
                     PlaylistItemListResponse playlistItemResult = playlistItemRequest.execute();
 
+                    // Iterate over playList response to get user's watch history
                     for (int i = 0; i < playlistItemResult.getItems().size(); i++) {
                         if (playlistItemResult.getItems().get(i).getSnippet().getThumbnails() != null) {
 
@@ -163,6 +171,8 @@ public class Main extends AppCompatActivity {
             }
         }.execute((Void) null);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
